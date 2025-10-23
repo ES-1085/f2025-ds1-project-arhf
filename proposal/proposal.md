@@ -34,16 +34,19 @@ Cardio).
 
 BMI — a calculated measure of body fat based on weight and height.
 
-For this research project we are looking to see these questions? 1. How
-do different workout types (Strength, HIIT, Cardio) affect an
-individual’s heart rate response (Max_BPM, Avg_BPM, and Resting_BPM)?
+For this research project we are looking to see these questions:
+
+1.  How do different workout types (Strength, HIIT, Cardio) affect an
+    individual’s heart rate response (Max_BPM, Avg_BPM, and
+    Resting_BPM)?
 
 2.  How do physical characteristics such as BMI, weight, and age
     influence calories burned and heart rate during workouts?
 
 ## 2. Data
 
-There are 54 columns and 2000 rows.
+There are 54 columns and 2000 rows. For this project we will focus on 11
+relevant variables.
 
 ``` r
 Final_data <- read_csv("../data/Final_data.csv")
@@ -121,18 +124,75 @@ glimpse(Final_data)
 
 ## 3. Data analysis plan
 
-Text goes here. - What variables will you visualize to explore your
-research questions? - Will there be any other data that you need to find
-to help with your research question? - Very preliminary exploratory data
-analysis, including some summary statistics and visualizations, along
-with some explanation on how they help you learn more about your data.
-(You can add to these later as you work on your project.) - The data
-visualization(s) that you believe will be useful in exploring your
-question(s). (You can update these later as you work on your project.)
+- We will visualize the variables Max_BPM, Avg_BPM, and Resting_BPM
+  across different workout types Strength, HIIT, Cardio etc. for
+  question 1.
+
+-We will visualize BMI, weight, and age to calories burned and Avg_BPM
+for question 2.
+
+- We will not need any other data to help with our research question
+
+Basic summary statistics and visualizations:
 
 ``` r
-# select variables we wanna use 
-#Code goes here
-# Code to calculate summary statistics
-# Code for a visualization
+Final_data |> 
+  select(Age, Gender, `Weight (kg)`, `Height (m)` , Max_BPM, Avg_BPM, Resting_BPM, `Session_Duration (hours)` , Calories_Burned, Workout_Type, BMI) |>
+  summary()
 ```
+
+    ##       Age           Gender           Weight (kg)       Height (m)   
+    ##  Min.   :18.00   Length:20000       Min.   : 39.18   Min.   :1.490  
+    ##  1st Qu.:28.17   Class :character   1st Qu.: 58.16   1st Qu.:1.620  
+    ##  Median :39.87   Mode  :character   Median : 70.00   Median :1.710  
+    ##  Mean   :38.85                      Mean   : 73.90   Mean   :1.723  
+    ##  3rd Qu.:49.63                      3rd Qu.: 86.10   3rd Qu.:1.800  
+    ##  Max.   :59.67                      Max.   :130.77   Max.   :2.010  
+    ##     Max_BPM         Avg_BPM       Resting_BPM    Session_Duration (hours)
+    ##  Min.   :159.3   Min.   :119.1   Min.   :49.49   Min.   :0.490           
+    ##  1st Qu.:170.1   1st Qu.:131.2   1st Qu.:55.96   1st Qu.:1.050           
+    ##  Median :180.1   Median :143.0   Median :62.20   Median :1.270           
+    ##  Mean   :179.9   Mean   :143.7   Mean   :62.20   Mean   :1.259           
+    ##  3rd Qu.:189.4   3rd Qu.:156.1   3rd Qu.:68.09   3rd Qu.:1.460           
+    ##  Max.   :199.6   Max.   :169.8   Max.   :74.50   Max.   :2.020           
+    ##  Calories_Burned  Workout_Type            BMI       
+    ##  Min.   : 323.1   Length:20000       Min.   :12.04  
+    ##  1st Qu.: 910.8   Class :character   1st Qu.:20.10  
+    ##  Median :1231.5   Mode  :character   Median :24.12  
+    ##  Mean   :1280.1                      Mean   :24.92  
+    ##  3rd Qu.:1553.1                      3rd Qu.:28.56  
+    ##  Max.   :2890.8                      Max.   :50.23
+
+The summary statistics give an overview of each of the participants’
+demographics and physiological measures which can help us identify any
+patterns and ranges.
+
+``` r
+ggplot(Final_data, aes(x = Avg_BPM)) +
+  geom_histogram() +
+  facet_wrap(~ Workout_Type)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+
+![](proposal_files/figure-gfm/visual1-1.png)<!-- --> This histogram
+helps visualize which workouts tend to have higher average heart rates
+which can tell us about how which types are more intense across
+participants.
+
+``` r
+ggplot(Final_data, aes(x = Calories_Burned, fill = Workout_Type)) +
+  geom_density(alpha = 0.3)
+```
+
+![](proposal_files/figure-gfm/visual2-1.png)<!-- -->
+
+This density plot helps show how calorie expenditure varies by workout
+type, helping show which workouts are more intense across different
+participants. Yoga and cardio show clusters and peaks around lower
+ranges, with HIIT and strength clusters at higher calories burned.This
+will help us inform our data for mapping different physiological metrics
+against calories burned.
+
+We will continue to add visualizations to help us answer our research
+questions.
