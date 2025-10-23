@@ -33,14 +33,12 @@ For this research project we are looking to see these questions?
 
 ## 2. Data
 
-Text goes here. Place your data in the /data folder, and add dimensions and codebook to the README in that folder. Then print out the output of glimpse() or skim() of your data frame.
+There are 54 columns and 2000 rows.
 
-```{r}
-# Code goes here
-# Read in your data file
-# Print the output of glimpse() or skim()
+```{r glimpse-data}
 
 Final_data <- read_csv("../data/Final_data.csv")
+glimpse(Final_data)
 ```
 
 ## 3. Data analysis plan
