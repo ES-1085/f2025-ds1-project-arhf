@@ -12,11 +12,24 @@ library(broom)
 
 ## 1. Introduction
 
-1. How do different workouts effect individual's heart rates?
-2. 
-The introduction should introduce your general research question(s) and your data (where it came from, how it was collected, what are the cases, what are the variables, etc.).
+The lifestyle dataset was curated by Omar Essa. While the specific method of data collection is not documented, it appears to come from an experimental study that tracked participants’ health and fitness metrics over time. Participants’ physiological and workout-related data were recorded, likely through wearable fitness devices or controlled monitoring during exercise sessions.
 
-Text goes here. Refer to the Markdown Quick Reference: Help -> Markdown Quick Reference. 
+Our subset of the dataset includes 11 variables describing demographic, physical, and workout information for each participant. These include:
+
+Age, Gender, Weight, and Height — basic demographic and body measurements.
+
+Max_BPM, Avg_BPM, and Resting_BPM — heart rate data capturing intensity and recovery.
+
+Session_Duration and Calories_Burned — indicators of workout duration and energy expenditure.
+
+Workout_Type — the kind of exercise performed (e.g., Strength, HIIT, Cardio).
+
+BMI — a calculated measure of body fat based on weight and height.
+
+For this research project we are looking to see these questions?
+1. How do different workout types (Strength, HIIT, Cardio) affect an individual’s heart rate response (Max_BPM, Avg_BPM, and Resting_BPM)?
+
+2. How do physical characteristics such as BMI, weight, and age influence calories burned and heart rate during workouts?
 
 ## 2. Data
 
