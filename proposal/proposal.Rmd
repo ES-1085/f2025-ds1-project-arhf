@@ -49,6 +49,7 @@ glimpse(Final_data)
 
 - We will not need any other data to help with our research question
 
+
 Basic summary statistics and visualizations: 
 
 ```{r dataanalysis}
