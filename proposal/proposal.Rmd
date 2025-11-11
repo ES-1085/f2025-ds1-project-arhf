@@ -49,7 +49,6 @@ glimpse(Final_data)
 
 - We will not need any other data to help with our research question
 
-
 Basic summary statistics and visualizations: 
 
 ```{r dataanalysis}
@@ -68,10 +67,35 @@ This histogram helps visualize which workouts tend to have higher average heart 
 
 ```{r visual2}
 ggplot(Final_data, aes(x = Calories_Burned, fill = Workout_Type)) +
-  geom_density(alpha = 0.3)
+  geom_density(alpha = 0.3) +
+  labs(
+    title = "Distribution of Calories Burned by Workout Type",
+    subtitle = "Density plot showing how calorie burn varies across workouts",
+    x = "Calories Burned",
+    y = "Density",
+    fill = "Workout Type"
+  ) 
 ```
 
 This density plot helps show how calorie expenditure varies by workout type, helping show which workouts are more intense across different participants. Yoga and cardio show clusters and peaks around lower ranges, with HIIT and strength clusters at higher calories burned.This will help us inform our data for mapping different physiological metrics against calories burned.
 
 We will continue to add visualizations to help us answer our research questions.
+
+```{r violin-and-box}
+ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Type)) +
+  geom_violin(alpha = 0.6, trim = FALSE) +
+  geom_boxplot(width = 0.15, color = "white", alpha = 0.9) +
+  scale_fill_viridis_d(option = "plasma") +
+  labs(
+    title = "Calories Burned by Workout Type",
+    subtitle = "Violin plots show full distribution; boxplots show medians and quartiles",
+    x = "Workout Type",
+    y = "Calories Burned"
+  ) +
+  theme(legend.position = "none")
+```
+```{r save-plot}
+ggsave("/cloud/project/workouttype.pdf")
+ggsave("/cloud/project/workouttype.png")
+```
 
