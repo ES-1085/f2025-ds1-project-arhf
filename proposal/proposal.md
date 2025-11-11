@@ -182,7 +182,14 @@ participants.
 
 ``` r
 ggplot(Final_data, aes(x = Calories_Burned, fill = Workout_Type)) +
-  geom_density(alpha = 0.3)
+  geom_density(alpha = 0.3) +
+  labs(
+    title = "Distribution of Calories Burned by Workout Type",
+    subtitle = "Density plot showing how calorie burn varies across workouts",
+    x = "Calories Burned",
+    y = "Density",
+    fill = "Workout Type"
+  ) 
 ```
 
 ![](proposal_files/figure-gfm/visual2-1.png)<!-- -->
@@ -196,3 +203,31 @@ against calories burned.
 
 We will continue to add visualizations to help us answer our research
 questions.
+
+``` r
+ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Type)) +
+  geom_violin(alpha = 0.6, trim = FALSE) +
+  geom_boxplot(width = 0.15, color = "white", alpha = 0.9) +
+  scale_fill_viridis_d(option = "plasma") +
+  labs(
+    title = "Calories Burned by Workout Type",
+    subtitle = "Violin plots show full distribution; boxplots show medians and quartiles",
+    x = "Workout Type",
+    y = "Calories Burned"
+  ) +
+  theme(legend.position = "none")
+```
+
+![](proposal_files/figure-gfm/violin-and-box-1.png)<!-- -->
+
+``` r
+ggsave("/cloud/project/workouttype.pdf")
+```
+
+    ## Saving 7 x 5 in image
+
+``` r
+ggsave("/cloud/project/workouttype.png")
+```
+
+    ## Saving 7 x 5 in image
