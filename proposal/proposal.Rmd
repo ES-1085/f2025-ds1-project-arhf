@@ -99,3 +99,21 @@ ggsave("/cloud/project/workouttype.pdf")
 ggsave("/cloud/project/workouttype.png")
 ```
 
+```{r - plot2}
+ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
+  geom_smooth(se = FALSE, method = "loess", size = 1.8) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(
+    title = "Weight and Max Heart Rate",
+    subtitle = "Shows whether body weight affects intensity",
+    x = "Weight (Kg)",
+    y = "Max Heart BPM"
+  ) +
+  theme_minimal(base_size = 13)
+
+```
+```{r plot2save}
+ggsave("/cloud/project/maxBPM.pdf")
+ggsave("/cloud/project/maxBPM.png")
+```
+
