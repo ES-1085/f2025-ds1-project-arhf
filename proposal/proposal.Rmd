@@ -7,6 +7,7 @@ output: github_document
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+library(hexbin)
 ## Add any additional packages you are using here
 ```
 
@@ -81,10 +82,14 @@ This density plot helps show how calorie expenditure varies by workout type, hel
 
 We will continue to add visualizations to help us answer our research questions.
 
-```{r violin-and-box}
+```{r violin-and-box, fig.alt= " Violin and boxplots comparing calories burned for Cardio, HIIT, Strength, and Yoga. The y axis shows calories burned and the x axis shows workout type. This chart highlights differences in intensity, with HIIT showing the highest values with a longer violin plot showing variation across values and the Yoga being the lowest intensity workout with a narrow violin plot showing less variation across data." }
 ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Type)) +
   geom_violin(alpha = 0.6, trim = FALSE) +
-  geom_boxplot(width = 0.15, color = "white", alpha = 0.9) +
+  geom_boxplot(width = 0.15,
+               color = "black",     
+               fill = "white",  
+               outlier.color = "black", 
+               outlier.size = 2,alpha = 0.9) +
   scale_fill_viridis_d(option = "plasma") +
   labs(
     title = "Calories Burned by Workout Type",
@@ -101,8 +106,7 @@ ggsave("/cloud/project/workouttype.png")
 
 
 
-
-Q. Plot2
+Q. Plot
 
 ```{r - plot2}
 ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
@@ -114,6 +118,7 @@ ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
     x = "Weight (Kg)",
     y = "Max Heart BPM"
   ) +
+  facet_wrap(~Gender) +
   theme_minimal(base_size = 13)
 
 ```
@@ -127,9 +132,25 @@ ggsave("/cloud/project/maxBPM.png")
 Q. Plot3
 
 
-
-
-
-
-
+```{r - BMI_Group}
+Final_data <- Final_data %>%
+  mutate(BMI_group = case_when(
+      BMI < 18.5                     ~ "A.Underweight (<18.5)",
+      BMI >= 18.5 & BMI <= 24.9      ~ "B.Normal (18.5–24.9)",
+      BMI >= 25   & BMI <= 29.9      ~ "C.Overweight (25.0–29.9)",
+      BMI >= 30                      ~ "D.Obese (≥30.0)",
+  )
+  ) %>%
+  filter(!is.na(BMI_group))
+```
+```{r - plot3}
+ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
+  geom_boxplot() +
+  facet_wrap(~ Gender) +
+  labs(
+    title = "Calories Burned vs. BMI",
+    y = "BMI Group",
+    x = "Calories Burned"
+  )
+```
 

@@ -5,6 +5,7 @@ ARHF
 ``` r
 library(tidyverse)
 library(broom)
+library(hexbin)
 ## Add any additional packages you are using here
 ```
 
@@ -207,7 +208,11 @@ questions.
 ``` r
 ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Type)) +
   geom_violin(alpha = 0.6, trim = FALSE) +
-  geom_boxplot(width = 0.15, color = "white", alpha = 0.9) +
+  geom_boxplot(width = 0.15,
+               color = "black",     
+               fill = "white",  
+               outlier.color = "black", 
+               outlier.size = 2,alpha = 0.9) +
   scale_fill_viridis_d(option = "plasma") +
   labs(
     title = "Calories Burned by Workout Type",
@@ -218,7 +223,7 @@ ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Typ
   theme(legend.position = "none")
 ```
 
-![](proposal_files/figure-gfm/violin-and-box-1.png)<!-- -->
+<img src="proposal_files/figure-gfm/violin-and-box-1.png" alt=" Violin and boxplots comparing calories burned for Cardio, HIIT, Strength, and Yoga. The y axis shows calories burned and the x axis shows workout type. This chart highlights differences in intensity, with HIIT showing the highest values with a longer violin plot showing variation across values and the Yoga being the lowest intensity workout with a narrow violin plot showing less variation across data."  />
 
 ``` r
 ggsave("/cloud/project/workouttype.pdf")
@@ -231,3 +236,45 @@ ggsave("/cloud/project/workouttype.png")
 ```
 
     ## Saving 7 x 5 in image
+
+Q. Plot
+
+``` r
+ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
+  geom_smooth(se = FALSE, method = "loess", size = 1.8) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(
+    title = "Weight and Max Heart Rate",
+    subtitle = "Shows whether body weight affects intensity",
+    x = "Weight (Kg)",
+    y = "Max Heart BPM"
+  ) +
+  facet_wrap(~Gender) +
+  theme_minimal(base_size = 13)
+```
+
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+![](proposal_files/figure-gfm/-%20plot2-1.png)<!-- -->
+
+``` r
+ggsave("/cloud/project/maxBPM.pdf")
+```
+
+    ## Saving 7 x 5 in image
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+``` r
+ggsave("/cloud/project/maxBPM.png")
+```
+
+    ## Saving 7 x 5 in image
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+Q. Plot3
