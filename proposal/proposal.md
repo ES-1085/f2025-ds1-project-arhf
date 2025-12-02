@@ -237,7 +237,7 @@ ggsave("/cloud/project/workouttype.png")
 
     ## Saving 7 x 5 in image
 
-Q. Plot2
+Q. Plot
 
 ``` r
 ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
