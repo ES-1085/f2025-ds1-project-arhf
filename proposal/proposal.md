@@ -216,11 +216,11 @@ ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Typ
   scale_fill_viridis_d(option = "plasma") +
   labs(
     title = "Calories Burned by Workout Type",
-    subtitle = "Violin plots show full distribution; boxplots show medians and quartiles",
+    subtitle = "Workout types differ widely in calorie burn, with HIIT standing out as the most intense.",
     x = "Workout Type",
     y = "Calories Burned"
   ) +
-  theme(legend.position = "none")
+  theme(legend.position = "right")
 ```
 
 <img src="proposal_files/figure-gfm/violin-and-box-1.png" alt=" Violin and boxplots comparing calories burned for Cardio, HIIT, Strength, and Yoga. The y axis shows calories burned and the x axis shows workout type. This chart highlights differences in intensity, with HIIT showing the highest values with a longer violin plot showing variation across values and the Yoga being the lowest intensity workout with a narrow violin plot showing less variation across data."  />
@@ -277,4 +277,31 @@ ggsave("/cloud/project/maxBPM.png")
     ## Saving 7 x 5 in image
     ## `geom_smooth()` using formula = 'y ~ x'
 
-Q. Plot3
+Q. Creating BMI group
+
+``` r
+Final_data <- Final_data %>%
+  mutate(BMI_group = case_when(
+      BMI < 18.5                     ~ "A.Underweight (<18.5)",
+      BMI >= 18.5 & BMI <= 24.9      ~ "B.Normal (18.5–24.9)",
+      BMI >= 25   & BMI <= 29.9      ~ "C.Overweight (25.0–29.9)",
+      BMI >= 30                      ~ "D.Obese (≥30.0)",
+  )
+  ) %>%
+  filter(!is.na(BMI_group))
+```
+
+Plot3
+
+``` r
+ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
+  geom_boxplot() +
+  facet_wrap(~ Gender) +
+  labs(
+    title = "Calories Burned vs. BMI",
+    y = "BMI Group",
+    x = "Calories Burned"
+  )
+```
+
+![](proposal_files/figure-gfm/-%20plot3-1.png)<!-- -->
