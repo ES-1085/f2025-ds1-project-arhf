@@ -100,6 +100,10 @@ ggsave("/cloud/project/workouttype.png")
 ```
 
 
+
+
+Q. Plot2
+
 ```{r - plot2}
 ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
   geom_smooth(se = FALSE, method = "loess", size = 1.8) +
@@ -117,5 +121,15 @@ ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
 ggsave("/cloud/project/maxBPM.pdf")
 ggsave("/cloud/project/maxBPM.png")
 ```
+
+
+
+Q. Plot3
+
+
+
+
+
+
 
 
