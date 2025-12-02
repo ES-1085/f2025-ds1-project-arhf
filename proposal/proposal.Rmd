@@ -92,10 +92,11 @@ ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Typ
     x = "Workout Type",
     y = "Calories Burned"
   ) +
-  theme(legend.position = "none")
+  theme(legend.position = "right")
 ```
 ```{r save-plot}
 ggsave("/cloud/project/workouttype.pdf")
 ggsave("/cloud/project/workouttype.png")
 ```
+
 
