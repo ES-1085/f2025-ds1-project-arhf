@@ -93,7 +93,7 @@ ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Typ
   scale_fill_viridis_d(option = "plasma") +
   labs(
     title = "Calories Burned by Workout Type",
-    subtitle = "Violin plots show full distribution; boxplots show medians and quartiles",
+    subtitle = "Workout types differ widely in calorie burn, with HIIT standing out as the most intense.",
     x = "Workout Type",
     y = "Calories Burned"
   ) +
@@ -129,8 +129,7 @@ ggsave("/cloud/project/maxBPM.png")
 
 
 
-Q. Plot3
-
+Q. Creating BMI group
 
 ```{r - BMI_Group}
 Final_data <- Final_data %>%
@@ -143,6 +142,8 @@ Final_data <- Final_data %>%
   ) %>%
   filter(!is.na(BMI_group))
 ```
+
+Plot3
 ```{r - plot3}
 ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
   geom_boxplot() +
