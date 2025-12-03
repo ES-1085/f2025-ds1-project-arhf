@@ -155,8 +155,10 @@ ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
     title = "Calories Burned Across BMI Categories by Gender",
     subtitle = "Boxplots reveal how calorie expenditure differs across BMI categories and genders",
     y = "BMI Group",
-    x = "Calories Burned"
-  )
+    x = "Calories Burned",
+    fill = "BMI Groups"
+  )+
+  theme(legend.position = "right")
 ```
 
 ```{r plot3save}
