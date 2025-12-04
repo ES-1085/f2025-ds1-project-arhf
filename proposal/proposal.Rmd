@@ -134,7 +134,8 @@ ggsave("/cloud/project/maxBPM.png")
 Q. Plot3
 
 
-```{r - BMI_Group}
+```{r - plot3, fig.alt = "Boxplots showing calories burned across BMI gourps for male and female participants. The x axes shows the calories burned and the y axes shows the different BMI groups. This chart compare how calorie burn differs across BMI groups and gender, helping correlate physiological characteristics to workout intensity.The plot also shows that both obese groups and underweight groups tend to exhibit more outliers and lower median calorie expenditure compared to mid-range BMI groups"}
+
 Final_data <- Final_data %>%
   mutate(BMI_group = case_when(
       BMI < 18.5                     ~ "A.Underweight (<18.5)",
@@ -145,14 +146,25 @@ Final_data <- Final_data %>%
   ) %>%
   filter(!is.na(BMI_group))
 ```
+
 ```{r - plot3}
 ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
   geom_boxplot() +
   facet_wrap(~ Gender) +
   labs(
-    title = "Calories Burned vs. BMI",
+    title = "Calories Burned Across BMI Categories by Gender",
+    subtitle = "Boxplots reveal how calorie expenditure differs across BMI categories and genders",
     y = "BMI Group",
-    x = "Calories Burned"
-  )
+    x = "Calories Burned",
+    fill = "BMI Groups"
+  )+
+  theme(legend.position = "right")
 ```
+
+```{r plot3save}
+ggsave("/cloud/project/BMIgroups.pdf")
+ggsave("/cloud/project/BMIgroups.png")
+```
+
+
 
