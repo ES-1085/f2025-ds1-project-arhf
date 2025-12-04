@@ -133,7 +133,6 @@ ggsave("/cloud/project/maxBPM.pdf")
 ggsave("/cloud/project/maxBPM.png")
 ```
  
-
 ### Plot 3: ___________
 
 Add more plot sections as needed. Each project should have at least 3 plots, but talk to me if you have fewer than 3.
