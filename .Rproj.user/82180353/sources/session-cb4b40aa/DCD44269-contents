@@ -1,0 +1,172 @@
+---
+title: "Project proposal"
+author: "ARHF"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(broom)
+library(hexbin)
+## Add any additional packages you are using here
+```
+
+## 1. Introduction
+
+The lifestyle dataset was curated by Omar Essa. While the specific method of data collection is not documented, it appears to come from an experimental study that tracked participants’ health and fitness metrics over time. Participants’ physiological and workout-related data were recorded, likely through wearable fitness devices or controlled monitoring during exercise sessions.
+
+Our subset of the dataset includes 11 variables describing demographic, physical, and workout information for each participant. These include:
+
+Age, Gender, Weight, and Height — basic demographic and body measurements.
+
+Max_BPM, Avg_BPM, and Resting_BPM — heart rate data capturing intensity and recovery.
+
+Session_Duration and Calories_Burned — indicators of workout duration and energy expenditure.
+
+Workout_Type — the kind of exercise performed (e.g., Strength, HIIT, Cardio).
+
+BMI — a calculated measure of body fat based on weight and height.
+
+For this research project we are looking to see these questions:
+
+1. How do different workout types (Strength, HIIT, Cardio) affect an individual’s heart rate response (Max_BPM, Avg_BPM, and Resting_BPM)?
+
+2. How do physical characteristics such as BMI, weight, and age influence calories burned and heart rate during workouts?
+
+## 2. Data
+
+There are 54 columns and 2000 rows. For this project we will focus on 11 relevant variables.
+
+```{r glimpse-data}
+
+Final_data <- read_csv("../data/Final_data.csv")
+glimpse(Final_data)
+```
+
+## 3. Data analysis plan
+- We will visualize the variables Max_BPM, Avg_BPM, and Resting_BPM across different workout types Strength, HIIT, Cardio etc. for question 1.
+
+-We will visualize BMI, weight, and age to calories burned and Avg_BPM for question 2. 
+
+- We will not need any other data to help with our research question
+
+Basic summary statistics and visualizations: 
+
+```{r dataanalysis}
+Final_data |> 
+  select(Age, Gender, `Weight (kg)`, `Height (m)` , Max_BPM, Avg_BPM, Resting_BPM, `Session_Duration (hours)` , Calories_Burned, Workout_Type, BMI) |>
+  summary()
+```
+The summary statistics give an overview of each of the participants' demographics and physiological measures which can help us identify any patterns and ranges.  
+
+```{r visual1}
+ggplot(Final_data, aes(x = Avg_BPM)) +
+  geom_histogram() +
+  facet_wrap(~ Workout_Type)
+```
+This histogram helps visualize which workouts tend to have higher average heart rates which can tell us about how which types are more intense across participants. 
+
+```{r visual2}
+ggplot(Final_data, aes(x = Calories_Burned, fill = Workout_Type)) +
+  geom_density(alpha = 0.3) +
+  labs(
+    title = "Distribution of Calories Burned by Workout Type",
+    subtitle = "Density plot showing how calorie burn varies across workouts",
+    x = "Calories Burned",
+    y = "Density",
+    fill = "Workout Type"
+  ) 
+```
+
+This density plot helps show how calorie expenditure varies by workout type, helping show which workouts are more intense across different participants. Yoga and cardio show clusters and peaks around lower ranges, with HIIT and strength clusters at higher calories burned.This will help us inform our data for mapping different physiological metrics against calories burned.
+
+We will continue to add visualizations to help us answer our research questions.
+
+```{r violin-and-box, fig.alt= " Violin and boxplots comparing calories burned for Cardio, HIIT, Strength, and Yoga. The y axis shows calories burned and the x axis shows workout type. This chart highlights differences in intensity, with HIIT showing the highest values with a longer violin plot showing variation across values and the Yoga being the lowest intensity workout with a narrow violin plot showing less variation across data." }
+ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Type)) +
+  geom_violin(alpha = 0.6, trim = FALSE) +
+  geom_boxplot(width = 0.15,
+               color = "black",     
+               fill = "white",  
+               outlier.color = "black", 
+               outlier.size = 2,alpha = 0.9) +
+  scale_fill_viridis_d(option = "plasma") +
+  labs(
+    title = "Calories Burned by Workout Type",
+    subtitle = "Workout types vary in calorie burn, with HIIT the most intense",
+    x = "Workout Type",
+    y = "Calories Burned",
+    fill = "Workout Type"
+  ) +
+  theme(legend.position = "right")
+```
+```{r save-plot}
+ggsave("/cloud/project/workouttype.pdf")
+ggsave("/cloud/project/workouttype.png")
+```
+
+
+
+Q. Plot
+
+```{r - plot2, fig.alt = "Faceted smoothed line plot of weight on the x axis and max BPM on the y axis, with separate panels for men and women. Each line represents each workout type. The plot highlights peaks around the middle weights with variation among gender and workout types."}
+ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
+  geom_smooth(se = FALSE, method = "loess", size = 1.8) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(
+    title = "Weight and Max Heart Rate by Gender",
+    subtitle = "Max BPM peaks near mid-weights, with variation across workouts",
+    x = "Weight (Kg)",
+    y = "Max BPM",
+    color = "Workout Type"
+  ) +
+  facet_wrap(~Gender) +
+  theme_minimal(base_size = 13)
+
+```
+```{r plot2save}
+ggsave("/cloud/project/maxBPM.pdf")
+ggsave("/cloud/project/maxBPM.png")
+```
+
+
+
+Q. Plot3
+
+```{r create-variables}
+
+Final_data <- Final_data %>%
+  mutate(BMI_group = case_when(
+      BMI < 18.5                     ~ "A.Underweight (<18.5)",
+      BMI >= 18.5 & BMI <= 24.9      ~ "B.Normal (18.5–24.9)",
+      BMI >= 25   & BMI <= 29.9      ~ "C.Overweight (25.0–29.9)",
+      BMI >= 30                      ~ "D.Obese (≥30.0)",
+      TRUE ~ NA
+  )) |>
+  filter(!is.na(BMI_group))
+```
+
+Visualuze Plot
+
+```{r plot3, fig.alt = "Boxplots showing calories burned across BMI gourps for male and female participants. The x axes shows the calories burned and the y axes shows the different BMI groups. This chart compare how calorie burn differs across BMI groups and gender, helping correlate physiological characteristics to workout intensity.The plot also shows that both obese groups and underweight groups tend to exhibit more outliers and lower median calorie expenditure compared to mid-range BMI groups"}
+ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
+  geom_boxplot() +
+  facet_wrap(~ Gender) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(
+    title = "Calories Burned Across BMI Categories by Gender",
+    subtitle = "Boxplots reveal how calorie expenditure differs across BMI categories and genders",
+    y = "BMI Group",
+    x = "Calories Burned",
+    fill = "BMI Groups"
+  ) +
+  theme(legend.position = "right")
+```
+
+```{r plot3save}
+ggsave("/cloud/project/BMIgroups.pdf")
+ggsave("/cloud/project/BMIgroups.png")
+```
+
+
+
