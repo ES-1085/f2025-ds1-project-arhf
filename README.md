@@ -26,7 +26,7 @@ Our analysis makes us beliebe that workout type selection matters more than body
 
 ## Handout
 
-Our handout can be found [here](handout/handout.pdf). You can update the filename and extension of your handout, currently it is called handout.pdf
+Our handout can be found [here](handout/handout.pdf).
 
 ## Memo
 
