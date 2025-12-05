@@ -216,9 +216,10 @@ ggplot(Final_data, aes(x = Workout_Type, y = Calories_Burned, fill = Workout_Typ
   scale_fill_viridis_d(option = "plasma") +
   labs(
     title = "Calories Burned by Workout Type",
-    subtitle = "Workout types differ widely in calorie burn, with HIIT standing out as the most intense.",
+    subtitle = "Workout types vary in calorie burn, with HIIT the most intense",
     x = "Workout Type",
-    y = "Calories Burned"
+    y = "Calories Burned",
+    fill = "Workout Type"
   ) +
   theme(legend.position = "right")
 ```
@@ -244,10 +245,11 @@ ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
   geom_smooth(se = FALSE, method = "loess", size = 1.8) +
   scale_color_viridis_d(option = "plasma") +
   labs(
-    title = "Weight and Max Heart Rate",
-    subtitle = "Shows whether body weight affects intensity",
+    title = "Weight and Max Heart Rate by Gender",
+    subtitle = "Max BPM peaks near mid-weights, with variation across workouts",
     x = "Weight (Kg)",
-    y = "Max Heart BPM"
+    y = "Max BPM",
+    color = "Workout Type"
   ) +
   facet_wrap(~Gender) +
   theme_minimal(base_size = 13)
@@ -261,7 +263,7 @@ ggplot(Final_data, aes(x = `Weight (kg)`, y = Max_BPM, color = Workout_Type )) +
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](proposal_files/figure-gfm/-%20plot2-1.png)<!-- -->
+<img src="proposal_files/figure-gfm/- plot2-1.png" alt="Faceted smoothed line plot of weight on the x axis and max BPM on the y axis, with separate panels for men and women. Each line represents each workout type. The plot highlights peaks around the middle weights with variation among gender and workout types."  />
 
 ``` r
 ggsave("/cloud/project/maxBPM.pdf")
@@ -277,7 +279,7 @@ ggsave("/cloud/project/maxBPM.png")
     ## Saving 7 x 5 in image
     ## `geom_smooth()` using formula = 'y ~ x'
 
-Q. Creating BMI group
+Q. Plot3
 
 ``` r
 Final_data <- Final_data %>%
@@ -286,12 +288,12 @@ Final_data <- Final_data %>%
       BMI >= 18.5 & BMI <= 24.9      ~ "B.Normal (18.5–24.9)",
       BMI >= 25   & BMI <= 29.9      ~ "C.Overweight (25.0–29.9)",
       BMI >= 30                      ~ "D.Obese (≥30.0)",
-  )
-  ) %>%
+      TRUE ~ NA
+  )) |>
   filter(!is.na(BMI_group))
 ```
 
-Plot3
+Visualuze Plot
 
 ``` r
 ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
@@ -299,10 +301,43 @@ ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
   facet_wrap(~ Gender) +
   scale_color_viridis_d(option = "plasma") +
   labs(
-    title = "Calories Burned vs. BMI",
+    title = "Calories Burned Across BMI Categories by Gender",
+    subtitle = "Boxplots reveal how calorie expenditure differs across BMI categories and genders",
     y = "BMI Group",
-    x = "Calories Burned"
-  ) 
+    x = "Calories Burned",
+    fill = "BMI Groups"
+  ) +
+  theme(legend.position = "right")
 ```
 
-![](proposal_files/figure-gfm/-%20plot3-1.png)<!-- -->
+<img src="proposal_files/figure-gfm/plot3-1.png" alt="Boxplots showing calories burned across BMI gourps for male and female participants. The x axes shows the calories burned and the y axes shows the different BMI groups. This chart compare how calorie burn differs across BMI groups and gender, helping correlate physiological characteristics to workout intensity.The plot also shows that both obese groups and underweight groups tend to exhibit more outliers and lower median calorie expenditure compared to mid-range BMI groups"  />
+
+``` r
+ggsave("/cloud/project/BMIgroups.pdf")
+```
+
+    ## Saving 7 x 5 in image
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'B.Normal (18.5–24.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'C.Overweight (25.0–29.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'D.Obese (≥30.0)' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'B.Normal (18.5–24.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'C.Overweight (25.0–29.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'D.Obese (≥30.0)' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+
+``` r
+ggsave("/cloud/project/BMIgroups.png")
+```
+
+    ## Saving 7 x 5 in image
