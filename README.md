@@ -1,4 +1,3 @@
-
 Workout Intensity and Calorie Burn Analysis
 ================
 by Aasya, Rachel, Fraol and Hannah
