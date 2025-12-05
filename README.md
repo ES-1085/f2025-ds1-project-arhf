@@ -1,6 +1,6 @@
-Project title
+Workout Intensity and Calorie Burn Analysis
 ================
-by Aasya, Rachel, Froal and Hannah
+by Aasya, Rachel, Fraol and Hannah
 
 ## Summary
 
@@ -26,7 +26,7 @@ Our analysis makes us beliebe that workout type selection matters more than body
 
 ## Handout
 
-Our handout can be found [here](handout/handout.pdf). You can update the filename and extension of your handout, currently it is called handout.pdf
+Our handout can be found [here](handout/handout.pdf).
 
 ## Memo
 
@@ -34,12 +34,10 @@ A link to the code and how we created our graphics in our memo can be found [her
 
 ## Data
 
-Include a citation for your data here. See
-<http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
-on proper citation for datasets. If you got your data off the web, make
-sure to note the retrieval date.
+Kaggle and Omar Essa, “Lifestyle,” Data set, September 2025, accessed December 4, 2025, https://www.kaggle.com/datasets/jockeroika/life-style-data/data.
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+1. Kaggle and Omar Essa, “Lifestyle,” Data set, September 2025, accessed December 4, 2025, https://www.kaggle.com/datasets/jockeroika/life-style-data/data.
+2. Carla E. Cox, “Role of Physical Activity for Weight Loss and Weight Maintenance,” Diabetes Spectrum 30, no. 3 (August 1, 2017): 157–60, https://doi.org/10.2337/ds17-0013.
+3. Christine Byrne Mph Ldn Rd, “6 Factors That Can Affect How Many Calories You Burn,” EverydayHealth.com, November 21, 2023, https://www.everydayhealth.com/fitness/factors-that-can-affect-how-many-calories-you-burn/. 
