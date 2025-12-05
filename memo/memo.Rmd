@@ -32,7 +32,6 @@ Final_data |>
 ```
 
 ### Step 3: Create BMI groups
-
 We created BMI groups in our data to be able to investigate the overall trends in BMI more clearly for calorie burn. We used standard BMI cutoffs.
 
 ```{r BMI-groups}
@@ -73,18 +72,6 @@ ggsave("example-starwars-wide.png", width = 6, height = 4)
 ```
 
 
-
-### Plot 1: Carlories Burned to Workout Type
-
-#### Data cleanup steps specific to plot 1
-
-These data cleaning sections are optional and depend on if you have some data cleaning steps specific to a particular plot
-
-```{r}
-
-```
-
-
 #### Final Plot 1: Calories Burned by Workout Type (Violin + Boxplots)
 
 We decided to do a violin plot with a boxplot overlaid investigating how workout type could affect the calories burned of an individual. Incorporating feedback from our presentation, we outlined the yellow color to make it more clear. We used the viridis palette for color-blind viewers.
@@ -111,7 +98,8 @@ ggsave("/cloud/project/workouttype.pdf")
 ggsave("/cloud/project/workouttype.png")
 ```
 
-### Plot 2: Weight vs Max BPM by Workout Type, Faceted by Gender
+#### Final Plot 2: Weight vs Max BPM by Workout Type, Faceted by Gender
+
 We created a plot showing how weight can affect max BPM, and how it changed across workout type and gender. After getting feedback when we presented we faceted it by gender which makes trends clearer. Workout type is used with a viridis palette for accessibility. We also used loess smoothing curves to depict the trends better than many overlapping points.
 
 ```{r final-plot2, fig.alt = "A Faceted smoothed line plot of weight on the x axis and max BPM on the y axis, with separate panels for men and women. Each line represents each workout type. The plot highlights peaks around the middle weights with variation among gender and workout types. Strength and Yoga reach the highest values of BPM for Females, and Strength and HIIT for Males"}
@@ -134,5 +122,24 @@ ggsave("/cloud/project/maxBPM.png")
 
 ```
 
-### Plot 3: 
+#### Final Plot 3: BMI groups vs. Calories Burned, Facted by Gender
 
+We created a boxplot to compare calories burned across different BMI groups and gender. Since the raw values had wide variation, we used boxplots to show the distribution more clearly. After receiving feedback, we added faceting by gender so the differences between male and female participants are easier to see. Creating BMI groups from the numeric BMI variable also helped make patterns more interpretable when comparing how calorie expenditure differs across categories.
+
+```{r plot3, fig.alt = "Boxplots showing calories burned across BMI gourps for male and female participants. The x axes shows the calories burned and the y axes shows the different BMI groups. This chart compare how calorie burn differs across BMI groups and gender, helping correlate physiological characteristics to workout intensity.The plot also shows that both obese groups and underweight groups tend to exhibit more outliers and lower median calorie expenditure compared to mid-range BMI groups"}
+ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
+  geom_boxplot() +
+  facet_wrap(~ Gender) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(
+    title = "Calories Burned Across BMI Categories by Gender",
+    subtitle = "Boxplots reveal how calorie expenditure differs across BMI categories and genders",
+    y = "BMI Group",
+    x = "Calories Burned",
+    fill = "BMI Groups"
+  ) +
+  theme(legend.position = "right")
+
+ggsave("/cloud/project/BMIgroups.pdf")
+ggsave("/cloud/project/BMIgroups.png")
+```
