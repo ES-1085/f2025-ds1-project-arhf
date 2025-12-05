@@ -111,7 +111,7 @@ ggsave("/cloud/project/workouttype.pdf")
 ggsave("/cloud/project/workouttype.png")
 ```
 
-### Final Plot 2: Weight vs Max BPM by Workout Type, Faceted by Gender
+### Plot 2: Weight vs Max BPM by Workout Type, Faceted by Gender
 We created a plot showing how weight can affect max BPM, and how it changed across workout type and gender. After getting feedback when we presented we faceted it by gender which makes trends clearer. Workout type is used with a viridis palette for accessibility. We also used loess smoothing curves to depict the trends better than many overlapping points.
 
 ```{r final-plot2, fig.alt = "A Faceted smoothed line plot of weight on the x axis and max BPM on the y axis, with separate panels for men and women. Each line represents each workout type. The plot highlights peaks around the middle weights with variation among gender and workout types. Strength and Yoga reach the highest values of BPM for Females, and Strength and HIIT for Males"}
@@ -134,5 +134,5 @@ ggsave("/cloud/project/maxBPM.png")
 
 ```
 
-### Plot 3: BMI groups vs. Calories Burned, Facted by Gender
+### Plot 3: 
 
