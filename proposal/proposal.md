@@ -297,11 +297,12 @@ Plot3
 ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
   geom_boxplot() +
   facet_wrap(~ Gender) +
+  scale_color_viridis_d(option = "plasma") +
   labs(
     title = "Calories Burned vs. BMI",
     y = "BMI Group",
     x = "Calories Burned"
-  )
+  ) 
 ```
 
 ![](proposal_files/figure-gfm/-%20plot3-1.png)<!-- -->
