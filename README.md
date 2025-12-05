@@ -1,17 +1,15 @@
 Project title
 ================
-by Team name
+by Aasya, Rachel, Froal and Hannah
 
 ## Summary
 
-Write-up of your project and findings go here. Think of this as the text
-of your handout. The length should be roughly 5 minutes when read
-out loud. Although pacing varies, a 5-minute speech is roughly 750
-words. 
+This project analyzes how different workout types and body composition characteristics influence fitness outcomes, specifically focusing on calorie expenditure and heart rate response. Using a lifestyle dataset of 2,000 participants tracked through wearable fitness devices, we examined 11 key variables including demographic information (age, gender), physical characteristics (weight, height, BMI), workout details (type, duration, calories burned), and heart rate metrics (max, average, and resting BPM).
 
-Your results with proper output and
-graphics go in your handout, this space is for a brief summary of
-your project.
+## Methods
+We used visualization-based analysis using R (tidyverse, ggplot2) to explore patterns across workout types and body composition categories. Our approach included violin plots combined with box plots to compare calorie burn distributions and identify the median and outliers across workout types, smoothed line charts to examine weight-heart rate relationships across genders, and box plots to analyze BMI group differences. We categorized BMI into four standard groups (Underweight <18.5, Normal 18.5-24.9, Overweight 25.0-29.9, Obese ≥30.0) to examine body composition effects.
+
+##
 
 ## Handout
 
