@@ -32,7 +32,7 @@ We used visualization-based analysis using R (tidyverse, ggplot2) to explore pat
 2. `No workout intensity control`: HIIT sessions vary widely (Tabata vs. longer intervals). We don't know exact protocols used.
 3. `Yoga type unknown`: Yoga could range from gentle restorative to intense Power Yoga, and both have vastly different intensities.
 4. `Missing duration details`: We have session duration but don't know rest periods, which affect total calorie expenditure.
-5. `BMI doesn't distinguish muscle vs. fat`: A muscular athlete and an untrained person with high body fat could have identical BMI but vastly different fitness outcomes, and it is also not a fitness indicator since BMI tells us nothing about cardiovascular fitness, strength, or metabolic health.
+5. `BMI doesn't distinguish muscle vs fat`: A muscular athlete and an untrained person with high body fat could have identical BMI but vastly different fitness outcomes, and it is also not a fitness indicator since BMI tells us nothing about cardiovascular fitness, strength, or metabolic health.
 6. `Self Selection Bias`: Participants may have chosen workout types they already excel at, inflating certain metrics.
 
 ## Conclusions
