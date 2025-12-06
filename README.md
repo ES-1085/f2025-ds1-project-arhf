@@ -4,7 +4,7 @@ by Aasya, Rachel, Fraol and Hannah
 
 ## Summary
 
-This project analyzes how different workout types and body composition characteristics influence fitness outcomes, specifically focusing on calorie expenditure and heart rate response. Using a lifestyle dataset of 20,000 participants tracked through wearable fitness devices, we examined 11 key variables including demographic information (age, gender), physical characteristics (weight, height, BMI), workout details (type, duration, calories burned), and heart rate metrics (max, average, and resting BPM).
+This project analyzes how different workout types and body composition characteristics influence fitness outcomes, specifically focusing on calorie expenditure and heart rate response. Using a lifestyle dataset of 20,000 participants tracked through wearable fitness devices, we examined 11 key variables including demographic information (age, gender), physical characteristics (weight, height, BMI), workout details (type, duration, calories burned), and heart rate metrics (max, average, and resting BPM). Understanding the relationships between workout type, calorie burn, and heart rate can help inform exercise planning and public health recommendations.
 
 ## Research Questions
 
@@ -25,7 +25,7 @@ We used visualization-based analysis using R (tidyverse, ggplot2) to explore pat
 
 `Gender Specific Workout Ressponses` : An interesting finding emerged in gender specific heart rate peaks. For females, Strength and Yoga produce the highest max BPM values, while males reach peak heart rates during Strength and HIIT workouts. This suggests different physiological responses or training approaches between genders, where males may push harder during explosive, interval-based exercise, while females achieve higher heart rates during sustained effort activities like Yoga.
 
-`BMI shows Weak Predictive power` : Unlike workout type, BMI does not clearly predict calorie expenditure. The Normal BMI group displays the largest interquartile range, indicating high variability in calorie burn regardless of a 'healthy' body composition. Underweight and Obese categories produce more outliers and lower median calorie expenditure, but the wide spread within each category suggests that factors beyond body size, such as fitness level, effort intensity, and conditioning, play more significant roles.
+`BMI shows Weak Predictive power` : Unlike workout type, BMI does not clearly predict calorie expenditure. The Normal BMI group displays the largest interquartile range, indicating high variability in calorie burn regardless of a 'healthy' body composition. Underweight and Obese categories produce more outliers and lower median calorie expenditure, but the wide spread within each category suggests that factors beyond body size, such as fitness level, effort intensity, and conditioning, play more significant roles. After observing a weak relationship between BMI and calorie expenditure, we explored whether controlling for workout duration would clarify the pattern. We restricted the data to sessions lasting exactly one hour. However, this reduced the sample size to fewer than 200 participants, and the resulting patterns remained largely unchanged. Because the reduced dataset may lacked representatives, we decided not to include this filtered analysis in the final results.
 
 ## Limitations
 1. `No fitness level data`: We cannot distinguish between trained athletes and beginners, which significantly affects calorie burn and heart rate response.
@@ -34,6 +34,7 @@ We used visualization-based analysis using R (tidyverse, ggplot2) to explore pat
 4. `Missing duration details`: We have session duration but don't know rest periods, which affect total calorie expenditure.
 5. `BMI doesn't distinguish muscle vs fat`: A muscular athlete and an untrained person with high body fat could have identical BMI but vastly different fitness outcomes, and it is also not a fitness indicator since BMI tells us nothing about cardiovascular fitness, strength, or metabolic health.
 6. `Self Selection Bias`: Participants may have chosen workout types they already excel at, inflating certain metrics.
+7. `Unclear Data Collection Procedures`: The dataset does not provide detailed documentation on how workout type, calorie expenditure, or heart rate were measured. Differences in device accuracy or self-reported workout categories could generate measurement error that affects the observed relationships
 
 ## Conclusions
 

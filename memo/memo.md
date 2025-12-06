@@ -268,7 +268,34 @@ ggsave("/cloud/project/maxBPM.png")
     ## Saving 7 x 5 in image
     ## `geom_smooth()` using formula = 'y ~ x'
 
-### Plot 3: \_\_\_\_\_\_\_\_\_\_\_
+### Plot 3: BMI groups vs. Calories Burned, Facted by Gender
 
-Add more plot sections as needed. Each project should have at least 3
-plots, but talk to me if you have fewer than 3.
+We created a boxplot to compare calories burned across different BMI groups and gender. Since the raw values had wide variation, we used boxplots to show the distribution more clearly. After receiving feedback, we added faceting by gender so the differences between male and female participants are easier to see. Creating BMI groups from the numeric BMI variable also helped make patterns more interpretable when comparing how calorie expenditure differs across categories.
+
+```r
+ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
+  geom_boxplot() +
+  facet_wrap(~ Gender) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(
+    title = "Calories Burned Across BMI Categories by Gender",
+    subtitle = "Boxplots reveal how calorie expenditure differs across BMI categories and genders",
+    y = "BMI Group",
+    x = "Calories Burned",
+    fill = "BMI Groups"
+  ) +
+  theme(legend.position = "right")
+```
+<img src="memo_files/figure-gfm/final-plot3-1.png" alt="Boxplots showing calories burned across BMI gourps for male and female participants. The x axes shows the calories burned and the y axes shows the different BMI groups. This chart compare how calorie burn differs across BMI groups and gender, helping correlate physiological characteristics to workout intensity.The plot also shows that both obese groups and underweight groups tend to exhibit more outliers and lower median calorie expenditure compared to mid-range BMI groups"  />
+
+``` r
+ggsave("/cloud/project/BMIgroups.pdf")
+```
+
+    ## Saving 7 x 5 in image
+
+``` r
+ggsave("/cloud/project/BMIgroups.png")
+```
+
+    ## Saving 7 x 5 in image
