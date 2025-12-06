@@ -172,13 +172,6 @@ ggsave("example-starwars.png", width = 4, height = 4)
 ggsave("example-starwars-wide.png", width = 6, height = 4)
 ```
 
-### Plot 1: Carlories Burned to Workout Type
-
-#### Data cleanup steps specific to plot 1
-
-These data cleaning sections are optional and depend on if you have some
-data cleaning steps specific to a particular plot
-
 #### Final Plot 1: Calories Burned by Workout Type (Violin + Boxplots)
 
 We decided to do a violin plot with a boxplot overlaid investigating how
@@ -220,7 +213,7 @@ ggsave("/cloud/project/workouttype.png")
 
     ## Saving 7 x 5 in image
 
-### Plot 2: Weight vs Max BPM by Workout Type, Faceted by Gender
+#### Final Plot 2: Weight vs Max BPM by Workout Type, Faceted by Gender
 
 We created a plot showing how weight can affect max BPM, and how it
 changed across workout type and gender. After getting feedback when we
@@ -268,11 +261,17 @@ ggsave("/cloud/project/maxBPM.png")
     ## Saving 7 x 5 in image
     ## `geom_smooth()` using formula = 'y ~ x'
 
-### Plot 3: BMI groups vs. Calories Burned, Facted by Gender
+#### Final Plot 3: BMI groups vs. Calories Burned, Facted by Gender
 
-We created a boxplot to compare calories burned across different BMI groups and gender. Since the raw values had wide variation, we used boxplots to show the distribution more clearly. After receiving feedback, we added faceting by gender so the differences between male and female participants are easier to see. Creating BMI groups from the numeric BMI variable also helped make patterns more interpretable when comparing how calorie expenditure differs across categories.
+We created a boxplot to compare calories burned across different BMI
+groups and gender. Since the raw values had wide variation, we used
+boxplots to show the distribution more clearly. After receiving
+feedback, we added faceting by gender so the differences between male
+and female participants are easier to see. Creating BMI groups from the
+numeric BMI variable also helped make patterns more interpretable when
+comparing how calorie expenditure differs across categories.
 
-```r
+``` r
 ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
   geom_boxplot() +
   facet_wrap(~ Gender) +
@@ -286,6 +285,7 @@ ggplot(Final_data, aes(x = Calories_Burned , y = BMI_group, fill = BMI_group)) +
   ) +
   theme(legend.position = "right")
 ```
+
 <img src="memo_files/figure-gfm/final-plot3-1.png" alt="Boxplots showing calories burned across BMI gourps for male and female participants. The x axes shows the calories burned and the y axes shows the different BMI groups. This chart compare how calorie burn differs across BMI groups and gender, helping correlate physiological characteristics to workout intensity.The plot also shows that both obese groups and underweight groups tend to exhibit more outliers and lower median calorie expenditure compared to mid-range BMI groups"  />
 
 ``` r
@@ -293,6 +293,24 @@ ggsave("/cloud/project/BMIgroups.pdf")
 ```
 
     ## Saving 7 x 5 in image
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'B.Normal (18.5–24.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'C.Overweight (25.0–29.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'D.Obese (≥30.0)' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'B.Normal (18.5–24.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'C.Overweight (25.0–29.9)' in 'mbcsToSbcs': - substituted for – (U+2013)
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## for 'D.Obese (≥30.0)' in 'mbcsToSbcs': >= substituted for ≥ (U+2265)
 
 ``` r
 ggsave("/cloud/project/BMIgroups.png")
