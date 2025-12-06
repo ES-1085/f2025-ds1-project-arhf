@@ -46,7 +46,7 @@ Future research should employ longitudinal designs tracking individuals over tim
 
 ## Handout
 
-Our handout can be found [here](handout/handout.pdf).
+Our handout can be found [here](handout/ARHF_Handout.pdf).
 
 ## Memo
 
